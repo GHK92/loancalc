@@ -98,6 +98,19 @@ jQuery(document).ready(function($) {
         return formattedValue.replace('NOK', '') + ',-';
     }
 
+		// Ensure calculator element exists under krekkehus_planto image
+		function ensureCalculatorElement() {
+				if ($('#kl_calculator').length === 0) {
+						// Create the calculator element and insert it after the krekkehus_planto image
+						if ($('#klf_image_2').length > 0) {
+								$('#klf_image_2').after('<div id="kl_calculator"></div>');
+								console.log('Calculator element created and inserted after krekkehus_planto image');
+						} else {
+								console.log('Warning: #klf_image_2 (krekkehus_planto) not found. Cannot insert calculator element.');
+						}
+				}
+		}
+
 		function outputPostToPage(post) {
 				// Populate the fields with post data
 				$('#kl_title').text(post.title.rendered);
@@ -115,6 +128,9 @@ jQuery(document).ready(function($) {
 						} else {
 								console.log('No image found for krekkehus_planto.');
 						}
+
+						// Ensure calculator element exists, then populate it
+						ensureCalculatorElement();
 
 						// Add calculator field under krekkehus_planto
 						if (post.acf.calculator) {
