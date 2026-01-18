@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lånekalkulator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .calculator-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        .total-price {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .total-price-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .total-price-value {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .input-group {
+            margin-bottom: 30px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .slider-container {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .slider {
+            flex: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s;
+        }
+
+        .slider::-moz-range-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .deposit-input {
+            width: 180px;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .deposit-input:focus {
+            border-color: #667eea;
+        }
+
+        .results-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: #555;
+            font-size: 15px;
+        }
+
+        .result-value {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .monthly-section {
+            background: #fff;
+            border: 2px solid #667eea;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .monthly-title {
+            color: #667eea;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .total-monthly {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-monthly-label {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .total-monthly-value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .kr {
+            font-size: 0.9em;
+            margin-left: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Lånekalkulator</h1>
+
+        <div class="total-price">
+            <div class="total-price-label">Totalpris</div>
+            <div class="total-price-value">6 700 000 <span class="kr">kr</span></div>
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">Egenkapital (innskudd)</label>
+            <div class="slider-container">
+                <input
+                    type="range"
+                    class="slider"
+                    id="depositSlider"
+                    min="0"
+                    max="6700000"
+                    step="10000"
+                    value="1675000"
+                >
+                <input
+                    type="text"
+                    class="deposit-input"
+                    id="depositInput"
+                    value="1 675 000 kr"
+                >
+            </div>
+        </div>
+
+        <div class="results-section">
+            <div class="result-row">
+                <span class="result-label">Fellesgjeld</span>
+                <span class="result-value" id="jointDebt">5 025 000 kr</span>
+            </div>
+        </div>
+
+        <div class="monthly-section">
+            <div class="monthly-title">Månedlige utgifter</div>
+
+            <div class="result-row">
+                <span class="result-label">Renter fellesgjeld</span>
+                <span class="result-value" id="interestCost">19 263 kr</span>
+            </div>
+
+            <div class="result-row">
+                <span class="result-label">Driftskostnader</span>
+                <span class="result-value" id="operatingCost">3 698 kr</span>
+            </div>
+
+            <div class="total-monthly">
+                <span class="total-monthly-label">Totalt per måned</span>
+                <span class="total-monthly-value" id="totalMonthly">22 960 kr</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Constants
+        const TOTAL_PRICE = 6700000;
+        const ANNUAL_INTEREST_RATE = 0.046; // 4.6%
+        const MONTHLY_INTEREST_RATE = ANNUAL_INTEREST_RATE / 12;
+        const OPERATING_COST = 3698; // Fixed monthly operating cost
+
+        // Elements
+        const depositSlider = document.getElementById('depositSlider');
+        const depositInput = document.getElementById('depositInput');
+        const jointDebtEl = document.getElementById('jointDebt');
+        const interestCostEl = document.getElementById('interestCost');
+        const operatingCostEl = document.getElementById('operatingCost');
+        const totalMonthlyEl = document.getElementById('totalMonthly');
+
+        // Format number with spaces as thousand separator
+        function formatNumber(num) {
+            return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        }
+
+        // Parse formatted number string to integer
+        function parseFormattedNumber(str) {
+            return parseInt(str.replace(/\s/g, '').replace(/kr/g, '').trim());
+        }
+
+        // Calculate and update all values
+        function calculate() {
+            const deposit = parseInt(depositSlider.value);
+
+            // Calculate joint debt (total price - deposit)
+            const jointDebt = TOTAL_PRICE - deposit;
+
+            // Calculate monthly interest on joint debt
+            const monthlyInterest = jointDebt * MONTHLY_INTEREST_RATE;
+
+            // Calculate total monthly expenses
+            const totalMonthly = monthlyInterest + OPERATING_COST;
+
+            // Update display
+            jointDebtEl.textContent = formatNumber(jointDebt) + ' kr';
+            interestCostEl.textContent = formatNumber(monthlyInterest) + ' kr';
+            operatingCostEl.textContent = formatNumber(OPERATING_COST) + ' kr';
+            totalMonthlyEl.textContent = formatNumber(totalMonthly) + ' kr';
+            depositInput.value = formatNumber(deposit) + ' kr';
+        }
+
+        // Slider event listener
+        depositSlider.addEventListener('input', calculate);
+
+        // Input field event listener
+        depositInput.addEventListener('input', function(e) {
+            let value = parseFormattedNumber(e.target.value);
+
+            if (!isNaN(value)) {
+                // Clamp value between 0 and total price
+                value = Math.max(0, Math.min(value, TOTAL_PRICE));
+                depositSlider.value = value;
+                calculate();
+            }
+        });
+
+        // Format input on blur
+        depositInput.addEventListener('blur', function(e) {
+            let value = parseFormattedNumber(e.target.value);
+            if (isNaN(value)) {
+                value = parseInt(depositSlider.value);
+            }
+            value = Math.max(0, Math.min(value, TOTAL_PRICE));
+            depositSlider.value = value;
+            depositInput.value = formatNumber(value) + ' kr';
+            calculate();
+        });
+
+        // Allow only numbers and spaces in input
+        depositInput.addEventListener('keypress', function(e) {
+            const char = String.fromCharCode(e.which);
+            if (!/[\d\s]/.test(char)) {
+                e.preventDefault();
+            }
+        });
+
+        // Initial calculation
+        calculate();
+    </script>
+</body>
+</html>
