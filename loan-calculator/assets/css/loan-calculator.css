@@ -1,0 +1,222 @@
+/**
+ * Loan Calculator Plugin Styles
+ * Version: 1.0.0
+ */
+
+.loan-calculator-container {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    padding: 40px;
+    margin: 30px auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.loan-calc-title {
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.loan-calc-total-price {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.loan-calc-total-price-label {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.loan-calc-total-price-value {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.loan-calc-input-group {
+    margin-bottom: 30px;
+}
+
+.loan-calc-input-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.loan-calc-slider-container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.loan-calc-slider {
+    flex: 1;
+    min-width: 200px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    border-radius: 5px;
+    background: #ddd;
+    outline: none;
+}
+
+.loan-calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.loan-calc-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.loan-calc-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s;
+}
+
+.loan-calc-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+.loan-calc-deposit-input {
+    width: 180px;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.loan-calc-deposit-input:focus {
+    border-color: #667eea;
+}
+
+.loan-calc-results-section {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.loan-calc-result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.loan-calc-result-row:last-child {
+    border-bottom: none;
+}
+
+.loan-calc-result-label {
+    color: #555;
+    font-size: 15px;
+}
+
+.loan-calc-result-value {
+    font-weight: 600;
+    color: #333;
+    font-size: 16px;
+}
+
+.loan-calc-monthly-section {
+    background: #fff;
+    border: 2px solid #667eea;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.loan-calc-monthly-title {
+    color: #667eea;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.loan-calc-total-monthly {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.loan-calc-total-monthly-label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.loan-calc-total-monthly-value {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.loan-calc-kr {
+    font-size: 0.9em;
+    margin-left: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .loan-calculator-container {
+        padding: 25px;
+    }
+
+    .loan-calc-title {
+        font-size: 24px;
+    }
+
+    .loan-calc-total-price-value {
+        font-size: 26px;
+    }
+
+    .loan-calc-slider-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .loan-calc-slider {
+        min-width: 100%;
+    }
+
+    .loan-calc-deposit-input {
+        width: 100%;
+    }
+
+    .loan-calc-total-monthly {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
